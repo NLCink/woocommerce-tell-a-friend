@@ -13,6 +13,8 @@ class Setup {
         $this->upgrade = $upgrade;
 
         register_activation_hook(woo_file(), array($this, 'tell_a_friend_migration'));
+
+        add_action('wp_enqueue_scripts', array($this, 'taf_theme_enqueue_script'));
     }
 
     /**
@@ -40,6 +42,14 @@ class Setup {
 
         require_once($this->upgrade);
         dbDelta($sql);
+    }
+
+    /**
+     * Incluir scripts no tema
+     */
+    public function taf_theme_enqueue_script() {
+        wp_enqueue_script('functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script('theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.js', array('jquery'), '1.0.0', true);
     }
 
 }
