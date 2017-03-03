@@ -48,8 +48,16 @@ class Setup {
      * Incluir scripts no tema
      */
     public function taf_theme_enqueue_script() {
+
+        $l10n = array(
+            't_a_f_ajax_url' => admin_url('admin-ajax.php')
+        );
+
         wp_enqueue_script('functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
+
+        // ajax request
         wp_enqueue_script('theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.js', array('jquery'), '1.0.0', true);
+        wp_localize_script('theme-script', 't_a_f_obj', $l10n);
     }
 
 }
