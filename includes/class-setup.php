@@ -44,6 +44,15 @@ class Setup {
         dbDelta($sql);
     }
 
+    public function taf_admin_enqueue_script() {
+
+        // css
+        wp_enqueue_style('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/css/jquery.dataTables.min.css');
+
+        // js 
+        wp_enqueue_script('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/js/jquery.dataTables.min.js', array('jquery'), 'v1.10.12', true);
+    }
+
     /**
      * Incluir scripts no tema
      */
@@ -53,11 +62,15 @@ class Setup {
             't_a_f_ajax_url' => admin_url('admin-ajax.php')
         );
 
-        wp_enqueue_script('functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
+        // js
+        wp_enqueue_script('taf-functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
+
+        wp_enqueue_script('additional-methods', plugin_dir_url(__DIR__) . 'assets/plugins/jquery-validation/dist/additional-methods.min.js', array('jquery'), 'v1.15.0', true);
+        wp_enqueue_script('jquery-validation', plugin_dir_url(__DIR__) . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js', array('jquery'), 'v1.15.0', true);
 
         // ajax request
-        wp_enqueue_script('theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.js', array('jquery'), '1.0.0', true);
-        wp_localize_script('theme-script', 't_a_f_obj', $l10n);
+        wp_enqueue_script('taf-theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.js', array('jquery'), '1.0.0', true);
+        wp_localize_script('taf-theme-script', 't_a_f_obj', $l10n);
     }
 
 }
