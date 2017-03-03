@@ -15,6 +15,7 @@ class Setup {
         register_activation_hook(woo_file(), array($this, 'tell_a_friend_migration'));
 
         add_action('wp_enqueue_scripts', array($this, 'taf_theme_enqueue_script'));
+        add_action('admin_menu', array($this, 'taf_admin_menu'));
     }
 
     /**
@@ -44,6 +45,23 @@ class Setup {
         dbDelta($sql);
     }
 
+    /**
+     * Admin menu page
+     */
+    public function taf_admin_menu() {
+        add_menu_page(__('Indique um amigo', 'woocommerce-tell-a-friend'), __('Indique um amigo', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_admin_template'));
+    }
+
+    /**
+     * Admin template
+     */
+    public function taf_admin_template() {
+        include plugin_dir_url(__DIR__) . '/includes/admin-templates/tell-a-friend.php';
+    }
+
+    /**
+     * Incluir scripts no painel admin
+     */
     public function taf_admin_enqueue_script() {
 
         // css
