@@ -96,7 +96,7 @@ class Proccess {
         $discount_type = 'percent';
 
         // Expiry date
-        $expiry_date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + 2 days'));
+        $expiry_date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + ' . get_option('taf_days_valid') . ' days'));
 
         $coupon = array(
             'post_title' => $coupon_code,
@@ -109,12 +109,12 @@ class Proccess {
         $new_coupon_id = wp_insert_post($coupon);
 
         // Add meta
-        update_post_meta($new_coupon_id, 'discount_type', $discount_type);
-        update_post_meta($new_coupon_id, 'coupon_amount', $amount);
+        update_post_meta($new_coupon_id, 'discount_type', get_option('taf_discount_type', 'percent'));
+        update_post_meta($new_coupon_id, 'coupon_amount', get_option('taf_coupon_amount', '10'));
         update_post_meta($new_coupon_id, 'individual_use', 'yes');
         update_post_meta($new_coupon_id, 'product_ids', '');
         update_post_meta($new_coupon_id, 'exclude_product_ids', '');
-        update_post_meta($new_coupon_id, 'usage_limit', '');
+        update_post_meta($new_coupon_id, 'usage_limit', get_option('taf_usage_limit', '1'));
         update_post_meta($new_coupon_id, 'expiry_date', $expiry_date);
         update_post_meta($new_coupon_id, 'apply_before_tax', 'yes');
         update_post_meta($new_coupon_id, 'free_shipping', 'no');
