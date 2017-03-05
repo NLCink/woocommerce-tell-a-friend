@@ -1,0 +1,7 @@
+#formTellAFriend .input-wrap-taf{
+    margin-bottom: 10px;
+    max-width: 300px;
+}
+#formTellAFriend .input-wrap-taf select{
+    width: 100%;
+}
