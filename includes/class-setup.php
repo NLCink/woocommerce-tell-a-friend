@@ -15,6 +15,7 @@ class Setup {
         register_activation_hook(woo_file(), array($this, 'tell_a_friend_migration'));
 
         add_action('wp_enqueue_scripts', array($this, 'taf_theme_enqueue_script'));
+        add_action('admin_enqueue_scripts', array($this, 'taf_admin_enqueue_script'));
         add_action('admin_menu', array($this, 'taf_admin_menu'));
     }
 
@@ -49,14 +50,23 @@ class Setup {
      * Admin menu page
      */
     public function taf_admin_menu() {
-        add_menu_page(__('Indique um amigo', 'woocommerce-tell-a-friend'), __('Indique um amigo', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_admin_template'));
+        add_menu_page(__('Indique um amigo', 'woocommerce-tell-a-friend'), __('Indique um amigo', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_list_email_template'));
+        add_submenu_page('tell-a-friend', __('Amigos', 'woocommerce-tell-a-friend'), __('Amigos', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_list_email_template'));
+        add_submenu_page('tell-a-friend', __('Configurações', 'woocommerce-tell-a-friend'), __('Configurações', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend-config', array($this, 'taf_config_template'));
     }
 
     /**
-     * Admin template
+     * List emails template
      */
-    public function taf_admin_template() {
-        include plugin_dir_url(__DIR__) . '/includes/admin-templates/tell-a-friend.php';
+    public function taf_list_email_template() {
+        include woo_plugin_dir_path(__DIR__) . 'includes/admin-templates/tell-a-friend.php';
+    }
+
+    /**
+     * Config template
+     */
+    public function taf_config_template() {
+        include woo_plugin_dir_path(__DIR__) . 'includes/admin-templates/tell-a-friend-config.php';
     }
 
     /**
@@ -66,6 +76,7 @@ class Setup {
 
         // css
         wp_enqueue_style('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/css/jquery.dataTables.min.css');
+        wp_enqueue_style('style-admin-taf', plugin_dir_url(__DIR__) . 'assets/css/style-admin.css');
 
         // js 
         wp_enqueue_script('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/js/jquery.dataTables.min.js', array('jquery'), 'v1.10.12', true);
