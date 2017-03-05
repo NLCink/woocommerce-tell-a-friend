@@ -43,4 +43,4 @@ endif;
 
 include plugin_dir_path(__FILE__) . 'includes/class-setup.php';
 include plugin_dir_path(__FILE__) . 'includes/class-templates.php';
-include plugin_dir_path(__FILE__) . 'includes/class-ajax.php';
+include plugin_dir_path(__FILE__) . 'includes/class-proccess.php';
