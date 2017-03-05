@@ -66,7 +66,21 @@ class Setup {
      * Config template
      */
     public function taf_config_template() {
+        $this->save_config();
         include woo_plugin_dir_path(__DIR__) . 'includes/admin-templates/tell-a-friend-config.php';
+    }
+
+    /**
+     * Save config tell a friend
+     */
+    private function save_config() {
+
+        if (isset($_POST['send-option'])):
+            update_option('taf_discount_type', filter_input(INPUT_POST, 'discount_type', FILTER_SANITIZE_STRING));
+            update_option('taf_coupon_amount', filter_input(INPUT_POST, 'coupon_amount', FILTER_SANITIZE_STRING));
+            update_option('taf_usage_limit', filter_input(INPUT_POST, 'usage_limit', FILTER_SANITIZE_STRING));
+            update_option('taf_days_valid', filter_input(INPUT_POST, 'days_valid', FILTER_SANITIZE_STRING));
+        endif;
     }
 
     /**
