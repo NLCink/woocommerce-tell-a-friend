@@ -81,6 +81,7 @@ class Setup {
             update_option('taf_usage_limit', filter_input(INPUT_POST, 'usage_limit', FILTER_SANITIZE_STRING));
             update_option('taf_days_valid', filter_input(INPUT_POST, 'days_valid', FILTER_SANITIZE_STRING));
 
+            update_option('taf_thumb_header', filter_input(INPUT_POST, 'taf_thumb_header'));
             update_option('taf_my_email', filter_input(INPUT_POST, 'taf_my_email'));
             update_option('taf_friend_email', filter_input(INPUT_POST, 'taf_friend_email'));
             update_option('taf_cupom_email', filter_input(INPUT_POST, 'taf_cupom_email'));
@@ -97,7 +98,10 @@ class Setup {
         wp_enqueue_style('style-admin-taf', plugin_dir_url(__DIR__) . 'assets/css/style-admin.css');
 
         // js 
+        wp_enqueue_media();
+        wp_enqueue_script('taf-functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
         wp_enqueue_script('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/js/jquery.dataTables.min.js', array('jquery'), 'v1.10.12', true);
+        wp_enqueue_script('taf-admin-script', plugin_dir_url(__DIR__) . 'assets/js/admin-script.js', array('jquery'), '1.0.0', true);
     }
 
     /**
