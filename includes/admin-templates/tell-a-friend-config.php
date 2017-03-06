@@ -7,9 +7,11 @@ if (!defined('ABSPATH')) {
 function select_discount_type($type) {
 
     if (get_option('taf_discount_type') == $type):
-        echo 'selected="selected"';
+        return 'selected';
     endif;
 }
+
+$settings_wp_editor = array();
 ?>
 
 <div class="wrap">
@@ -30,7 +32,7 @@ function select_discount_type($type) {
 
                         <h2>
                             <span>
-                                <?php _e('Configurações do cupom, indique um amigo', 'woocommerce-tell-a-friend'); ?>
+                                <?php _e('Indique um amigo, configurações', 'woocommerce-tell-a-friend'); ?>
                             </span>
                         </h2>
 
@@ -45,19 +47,19 @@ function select_discount_type($type) {
 
                                         <select name="discount_type" id="discount_type">
 
-                                            <option <?php select_discount_type('taf_fixed_cart'); ?> value="fixed_cart">
+                                            <option <?php echo select_discount_type('fixed_cart'); ?> value="fixed_cart">
                                                 <?php _e('Desconto no carrinho', 'woocommerce-tell-a-friend'); ?>
                                             </option>
 
-                                            <option <?php select_discount_type('taf_percent'); ?> value="percent">
+                                            <option <?php echo select_discount_type('percent'); ?> value="percent">
                                                 <?php _e('% Desconto no carrinho', 'woocommerce-tell-a-friend'); ?>
                                             </option>
 
-                                            <option <?php select_discount_type('taf_fixed_product'); ?> value="fixed_product">
+                                            <option <?php echo select_discount_type('fixed_product'); ?> value="fixed_product">
                                                 <?php _e('Desconto no produto', 'woocommerce-tell-a-friend'); ?>
                                             </option>
 
-                                            <option <?php select_discount_type('taf_percent_product'); ?> value="percent_product">
+                                            <option <?php echo select_discount_type('percent_product'); ?> value="percent_product">
                                                 <?php _e('% Desconto no produto', 'woocommerce-tell-a-friend'); ?>
                                             </option>
 
@@ -85,6 +87,33 @@ function select_discount_type($type) {
                                         <?php _e('Dias de validade', 'woocommerce-tell-a-friend'); ?>
                                         <input class="large-text" type="number" min="0" name="days_valid" id="days_valid" placeholder="<?php _e('Dias de validade', 'woocommerce-tell-a-friend'); ?>" value="<?php echo get_option('taf_days_valid'); ?>">
                                     </label>
+                                </div>
+
+                                <div class="input-wrap-taf-12">
+                                    <h3>
+                                        <?php _e('Texto do e-mail enviado para quem indicou, dizer que seu amigo foi indicado com sucesso', 'woocommerce-tell-a-friend'); ?>
+                                    </h3>
+                                    <?php
+                                    wp_editor(get_option('taf_my_email'), 'taf_my_email', $settings_wp_editor);
+                                    ?>
+                                </div>
+
+                                <div class="input-wrap-taf-12">
+                                    <h3>
+                                        <?php _e('Texto do e-mail enviado para o amigo indicado, explicações de como deve proceder para seu amigo ganhar cupom de desconto', 'woocommerce-tell-a-friend'); ?>
+                                    </h3>
+                                    <?php
+                                    wp_editor(get_option('taf_friend_email'), 'taf_friend_email', $settings_wp_editor);
+                                    ?>
+                                </div>
+
+                                <div class="input-wrap-taf-12">
+                                    <h3>
+                                        <?php _e('Texto do e-mail enviado para o amigo com o cupom de desconto, explicações da válidade do cupom e como usar', 'woocommerce-tell-a-friend'); ?>
+                                    </h3>
+                                    <?php
+                                    wp_editor(get_option('taf_cupom_email'), 'taf_cupom_email', $settings_wp_editor);
+                                    ?>
                                 </div>
 
                             </form>
