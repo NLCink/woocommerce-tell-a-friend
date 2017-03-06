@@ -1,7 +1,20 @@
 #formTellAFriend .input-wrap-taf{
+    display: inline-block;
     margin-bottom: 10px;
-    max-width: 300px;
+    max-width: 405px;    
+    width: 100%;
 }
 #formTellAFriend .input-wrap-taf select{
+    width: 99%;
+}
+#formTellAFriend .input-wrap-taf-12{
+    display: inline-block;
+    margin-bottom: 10px;   
     width: 100%;
+}
+#formTellAFriend .input-wrap-taf-12 h3{
+    line-height: 28px;
+    padding: 10px;
+    border: dotted 1px #337ab7;
+    color: #337ab7;
 }
