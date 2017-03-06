@@ -10,7 +10,7 @@ class Proccess {
         add_action('wp_ajax_save_tell_a_friend', array($this, 'action_save_tell_a_friend'));
         add_action('wp_ajax_nopriv_save_tell_a_friend', array($this, 'action_save_tell_a_friend'));
 
-        $this->get_template_email_tell_a_friend_cupom();
+//        $this->get_template_email_tell_a_friend_cupom();
     }
 
     public function action_save_tell_a_friend() {
@@ -104,6 +104,18 @@ class Proccess {
      */
     public function get_template_email_tell_a_friend_cupom($my_email = 'hhh', $email_friend = 'vvv', $cupom = '') {
         include woo_plugin_dir_path(__DIR__) . 'templates/emails/email-tell-a-friend-cupom.php';
+    }
+
+    /**
+     * Template e-email quando o amigo indicado comprar, envia o cupom com de 
+     * desconto
+     * 
+     * @param string $my_email
+     * @param string $email_friend
+     * @return mixed
+     */
+    public function get_template_email_tell_a_friend_success($my_email = 'hhh', $email_friend = 'vvv') {
+        include woo_plugin_dir_path(__DIR__) . 'templates/emails/email-tell-a-friend-success.php';
     }
 
     /**
