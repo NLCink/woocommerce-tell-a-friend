@@ -91,7 +91,7 @@ $settings_wp_editor = array();
 
                                 <div class="input-wrap-taf-12">
                                     <h3>
-                                        <?php _e('Texto do e-mail enviado para quem indicou, dizer que seu amigo foi indicado com sucesso', 'woocommerce-tell-a-friend'); ?>
+                                        <?php _e('E-mail enviado para quem indicou, dizer que seu amigo foi indicado com sucesso', 'woocommerce-tell-a-friend'); ?>
                                     </h3>
                                     <?php
                                     wp_editor(get_option('taf_my_email'), 'taf_my_email', $settings_wp_editor);
@@ -100,7 +100,7 @@ $settings_wp_editor = array();
 
                                 <div class="input-wrap-taf-12">
                                     <h3>
-                                        <?php _e('Texto do e-mail enviado para o amigo indicado, explicações de como deve proceder para seu amigo ganhar cupom de desconto', 'woocommerce-tell-a-friend'); ?>
+                                        <?php _e('E-mail enviado para o amigo indicado, explicações de como deve proceder para seu amigo ganhar cupom de desconto', 'woocommerce-tell-a-friend'); ?>
                                     </h3>
                                     <?php
                                     wp_editor(get_option('taf_friend_email'), 'taf_friend_email', $settings_wp_editor);
@@ -109,7 +109,7 @@ $settings_wp_editor = array();
 
                                 <div class="input-wrap-taf-12">
                                     <h3>
-                                        <?php _e('Texto do e-mail enviado para o amigo com o cupom de desconto, explicações da válidade do cupom e como usar', 'woocommerce-tell-a-friend'); ?>
+                                        <?php _e('E-mail enviado para o amigo com o cupom de desconto, explicações da válidade do cupom e como usar', 'woocommerce-tell-a-friend'); ?>
                                     </h3>
                                     <?php
                                     wp_editor(get_option('taf_cupom_email'), 'taf_cupom_email', $settings_wp_editor);
@@ -138,6 +138,29 @@ $settings_wp_editor = array();
                         <div class="inside">
                             <p>
                                 <input form="formTellAFriend" type="submit" id="send-option" name="send-option" class="button-primary" value="<?php _e('Salvar', 'woocommerce-tell-a-friend'); ?>">
+                            </p>
+                        </div>
+                        <!-- .inside -->
+
+                    </div>
+                    <!-- .postbox -->
+                </div>
+                <!-- .meta-box-sortables -->
+
+                <div class="meta-box-sortables">
+                    <div class="postbox">
+
+                        <div class="inside">
+                            <p>
+                                <?php
+                                if (get_option('taf_thumb_header', false) != false):
+                                    echo "<img id='image-attachment' src='" . get_option('taf_thumb_header') . "'>";
+                                else:
+                                    echo '<div id="image"></div>';
+                                endif;
+                                ?>
+                                <a href="#" id="taf-wp-midia">Selecionar imagem para o cabeçalho dos e-mails</a>
+                                <input form="formTellAFriend" type="hidden" id="taf_thumb_header" name="taf_thumb_header" class="" value="<?php echo get_option('taf_thumb_header'); ?>">
                             </p>
                         </div>
                         <!-- .inside -->
