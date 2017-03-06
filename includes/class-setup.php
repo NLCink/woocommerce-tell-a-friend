@@ -80,6 +80,10 @@ class Setup {
             update_option('taf_coupon_amount', filter_input(INPUT_POST, 'coupon_amount', FILTER_SANITIZE_STRING));
             update_option('taf_usage_limit', filter_input(INPUT_POST, 'usage_limit', FILTER_SANITIZE_STRING));
             update_option('taf_days_valid', filter_input(INPUT_POST, 'days_valid', FILTER_SANITIZE_STRING));
+
+            update_option('taf_my_email', filter_input(INPUT_POST, 'taf_my_email'));
+            update_option('taf_friend_email', filter_input(INPUT_POST, 'taf_friend_email'));
+            update_option('taf_cupom_email', filter_input(INPUT_POST, 'taf_cupom_email'));
         endif;
     }
 
