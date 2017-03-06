@@ -15,32 +15,20 @@ if (!defined('ABSPATH')):
     exit;
 endif;
 
-$upgrade = ABSPATH . 'wp-admin/includes/upgrade.php';
+/**
+ * Check if WooCommerce is active
+ * */
+if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+    // Put your plugin code here
 
-if (!function_exists('woo_plugin_dir_path')):
+    add_action('woocommerce_loaded', function () {
 
-    function woo_plugin_dir_path($file) {
-        return plugin_dir_path($file);
-    }
+        $upgrade = ABSPATH . 'wp-admin/includes/upgrade.php';
 
-endif;
+        include plugin_dir_path(__FILE__) . 'includes/functions.php';
+        include plugin_dir_path(__FILE__) . 'includes/class-setup.php';
+        include plugin_dir_path(__FILE__) . 'includes/class-templates.php';
+        include plugin_dir_path(__FILE__) . 'includes/class-proccess.php';
 
-if (!function_exists('woo_plugin_dir_url')):
-
-    function woo_plugin_dir_url($file) {
-        return plugin_dir_url($file);
-    }
-
-endif;
-
-if (!function_exists('woo_file')):
-
-    function woo_file() {
-        return __FILE__;
-    }
-
-endif;
-
-include plugin_dir_path(__FILE__) . 'includes/class-setup.php';
-include plugin_dir_path(__FILE__) . 'includes/class-templates.php';
-include plugin_dir_path(__FILE__) . 'includes/class-proccess.php';
+    });
+}
