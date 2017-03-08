@@ -45,19 +45,30 @@
                 cache: false,
                 data: $formData,
                 beforeSend: function () {
-                    console.log('proccess...');
+                    $($btnSend).prevAll('.alert').remove();
+                    $($btnSend).prop('disabled', true);
+                    $($btnSend).prepend('<i class="fa fa-spinner fa-pulse fa-lg fa-fw"></i>');
                 },
                 success: function (data) {
-                    console.log(data);
+
+                    $($btnSend).find('.fa-spinner').remove();
+                    $($btnSend).prop('disabled', false);
+
+                    if (data === '1') {
+
+                        // Reseta todo formulário
+                        $($form).each(function () {
+                            this.reset();
+                        });
+
+                        $($btnSend).before('<p class="alert alert-success">Obrigado por indicar o BEERS4CHEERS para seus amigos.</p>');
+
+                    } else {
+                        $($btnSend).before('<p class="alert alert-warning">' + data + '</p>');
+                    }
                 }
-
             });
-
-
         }
-
-
     });
-
 
 })(jQuery);
