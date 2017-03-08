@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
         <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo('charset'); ?>" />
         <title><?php echo get_bloginfo('name', 'display'); ?></title>
     </head>
-    <body style="background-color: #eee;">
+    <body style="background-color: #eee; padding: 25px;">
 
         <div style="width: 600px; display: table; margin: 0 auto;">
 
