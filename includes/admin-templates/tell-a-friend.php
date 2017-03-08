@@ -13,7 +13,29 @@ if (!defined('ABSPATH')) {
 
     <div style="background-color: #fff; padding: 10px; margin-top: 20px;">
 
+        <table id="table-tell-a-friend">
 
+            <thead>
+                <tr>
+                    <th width="25%" align="left">E-mail Indicador</th>
+                    <th width="25%" align="left">E-mail Indicado</th>
+                    <th width="15%">Cupom</th>
+                    <th width="10%">Status</th>
+                    <th width="20%">Cadastrado</th>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <th width="25%" align="left">E-mail Indicador</th>
+                    <th width="25%" align="left">E-mail Indicado</th>
+                    <th width="15%">Cupom</th>
+                    <th width="10%">Status</th>
+                    <th width="20%">Cadastrado</th>
+                </tr>
+            </tfoot>
+
+        </table>
 
     </div><!-- /.table-list -->
 
