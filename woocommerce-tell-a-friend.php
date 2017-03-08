@@ -19,16 +19,20 @@ endif;
  * Check if WooCommerce is active
  * */
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-    // Put your plugin code here
 
-    add_action('woocommerce_loaded', function () {
+    if (!function_exists('woo_file')):
 
-        $upgrade = ABSPATH . 'wp-admin/includes/upgrade.php';
+        function woo_file() {
+            return __FILE__;
+        }
 
-        include plugin_dir_path(__FILE__) . 'includes/functions.php';
-        include plugin_dir_path(__FILE__) . 'includes/class-setup.php';
-        include plugin_dir_path(__FILE__) . 'includes/class-templates.php';
-        include plugin_dir_path(__FILE__) . 'includes/class-proccess.php';
+    endif;
 
-    });
+    $upgrade = ABSPATH . 'wp-admin/includes/upgrade.php';
+
+    include plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+    include plugin_dir_path(__FILE__) . 'includes/functions.php';
+    include plugin_dir_path(__FILE__) . 'includes/class-setup.php';
+    include plugin_dir_path(__FILE__) . 'includes/class-templates.php';
+    include plugin_dir_path(__FILE__) . 'includes/class-proccess.php';
 }
