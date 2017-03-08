@@ -40,6 +40,7 @@
                     $($taf_thumb_header).val($attachment.url);
                     $($image_attachment).attr('src', $attachment.url);
                 } else {
+                    $($taf_thumb_header).val($attachment.url);
                     $($image).html('<img src="' + $attachment.url + '">');
                 }
 
