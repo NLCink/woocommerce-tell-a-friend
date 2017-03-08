@@ -40,7 +40,7 @@ class Setup {
 		status int(1) NOT NULL,
 		create_at datetime NOT NULL,
 		UNIQUE KEY id (id)
-	) $charset_collate;";
+	)$charset_collate;";
 
         require_once($this->upgrade);
         dbDelta($sql);
@@ -50,7 +50,7 @@ class Setup {
      * Admin menu page
      */
     public function taf_admin_menu() {
-        add_menu_page(__('Indique um amigo', 'woocommerce-tell-a-friend'), __('Indique um amigo', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_list_email_template'));
+        add_menu_page(__('Indique um amigo', 'woocommerce-tell-a-friend'), __('Indique um amigo', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_list_email_template'), woo_dr_plugin_dir_url(__DIR__) . 'assets/images/tell-a-friend-icon.png', 60);
         add_submenu_page('tell-a-friend', __('Amigos', 'woocommerce-tell-a-friend'), __('Amigos', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend', array($this, 'taf_list_email_template'));
         add_submenu_page('tell-a-friend', __('Configurações', 'woocommerce-tell-a-friend'), __('Configurações', 'woocommerce-tell-a-friend'), 'manage_options', 'tell-a-friend-config', array($this, 'taf_config_template'));
     }
@@ -93,6 +93,10 @@ class Setup {
      */
     public function taf_admin_enqueue_script() {
 
+        $l10n = array(
+            't_a_f_ajax_url' => admin_url('admin-ajax.php')
+        );
+
         // css
         wp_enqueue_style('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/css/jquery.dataTables.min.css');
         wp_enqueue_style('style-admin-taf', plugin_dir_url(__DIR__) . 'assets/css/style-admin.css');
@@ -101,7 +105,10 @@ class Setup {
         wp_enqueue_media();
         wp_enqueue_script('taf-functions', plugin_dir_url(__DIR__) . 'assets/js/functions.js', array('jquery'), '1.0.0', true);
         wp_enqueue_script('datatables', plugin_dir_url(__DIR__) . 'assets/plugins/datatables/js/jquery.dataTables.min.js', array('jquery'), 'v1.10.12', true);
+
+        // ajax request
         wp_enqueue_script('taf-admin-script', plugin_dir_url(__DIR__) . 'assets/js/admin-script.js', array('jquery'), '1.0.0', true);
+        wp_localize_script('taf-admin-script', 't_a_f_obj', $l10n);
     }
 
     /**
@@ -120,7 +127,7 @@ class Setup {
         wp_enqueue_script('jquery-validation', plugin_dir_url(__DIR__) . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js', array('jquery'), 'v1.15.0', true);
 
         // ajax request
-        wp_enqueue_script('taf-theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script('taf-theme-script', plugin_dir_url(__DIR__) . 'assets/js/theme-script.min.js', array('jquery'), '1.0.0', true);
         wp_localize_script('taf-theme-script', 't_a_f_obj', $l10n);
     }
 
