@@ -170,6 +170,27 @@ $settings_wp_editor = array();
                 </div>
                 <!-- .meta-box-sortables -->
 
+
+                <div class="meta-box-sortables">
+                    <div class="postbox">
+
+                        <div class="inside">
+                            <p>
+                                <input form="formTellAFriend" class="large-text" type="text" name="taf_remetente_title" value="<?php echo get_option('taf_remetente_title'); ?>" placeholder="<?php _e('Titulo e-mail remetente', 'woocommerce-tell-a-friend'); ?>">
+                            </p>
+                            <p>
+                                <input form="formTellAFriend" class="large-text" type="text" name="taf_remetente_email" value="<?php echo get_option('taf_remetente_email'); ?>" placeholder="<?php _e('E-mail remetente', 'woocommerce-tell-a-friend'); ?>">
+                            </p>
+                        </div>
+                        <!-- .inside -->
+
+                    </div>
+                    <!-- .postbox -->
+                </div>
+                <!-- .meta-box-sortables -->
+
+
+
             </div>
             <!-- #postbox-container-1 .postbox-container -->
 
