@@ -85,6 +85,8 @@ class Setup {
             update_option('taf_my_email', filter_input(INPUT_POST, 'taf_my_email'));
             update_option('taf_friend_email', filter_input(INPUT_POST, 'taf_friend_email'));
             update_option('taf_cupom_email', filter_input(INPUT_POST, 'taf_cupom_email'));
+            update_option('taf_remetente_title', filter_input(INPUT_POST, 'taf_remetente_title'));
+            update_option('taf_remetente_email', filter_input(INPUT_POST, 'taf_remetente_email'));
         endif;
     }
 
