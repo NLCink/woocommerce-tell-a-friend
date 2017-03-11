@@ -39,7 +39,7 @@ class Proccess {
         if (!empty($friends_data) && $order->get_status() == 'processing'):
 
             $email_explode = explode('@', $email_order);
-            $codigo = strtoupper($email_explode[0]) . '_AMIGO';
+            $codigo = 'AMIGO_' . strtoupper($email_explode[0]) . '_BEERS4CHEERS_' . time();
 
             $this->taf_generate_cupom($codigo);
             $expiry_date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + ' . get_option('taf_days_valid') . ' days'));
@@ -165,8 +165,8 @@ class Proccess {
 
         $table_tell_a_friend = $wpdb->prefix . 'tell_a_friend';
 
-        $my_email = filter_input(INPUT_POST, 'my_email', FILTER_VALIDATE_EMAIL);
-        $friend_email = filter_input(INPUT_POST, 'friend_email', FILTER_VALIDATE_EMAIL);
+        $my_email = trim(filter_input(INPUT_POST, 'my_email', FILTER_VALIDATE_EMAIL));
+        $friend_email = trim(filter_input(INPUT_POST, 'friend_email', FILTER_VALIDATE_EMAIL));
         $nonce_tell_a_friend = filter_input(INPUT_POST, 'nonce_tell_a_friend');
 
         if (wp_verify_nonce($nonce_tell_a_friend, 'action_tell_a_friend')):
@@ -175,6 +175,8 @@ class Proccess {
                 echo 'Seu e-mail é inválido.';
             elseif (!$friend_email):
                 echo 'O e-mail do seu amigo é inválido.';
+            elseif ($my_email == $friend_email):
+                echo 'Atenção, seu e-mail e do seu amigo não pode ser o mesmo e-mail.';
             elseif ($this->data_exist($table_tell_a_friend, 'friend_email', $friend_email)):
                 echo 'O e-mail desse amigo já recebeu indicação, obrigado por indicar o BEERS4CHEERS para seus amigos';
             else:
