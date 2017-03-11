@@ -44,7 +44,11 @@ class Proccess {
             $this->taf_generate_cupom($codigo);
             $expiry_date = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' + ' . get_option('taf_days_valid') . ' days'));
 
-            $headers = "Content-Type: text/html\r\n";
+            $headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . get_option('taf_remetente_title') . ' <' . get_option('taf_remetente_email') . '>'
+            );
+
             $attachments = "";
 
             $str_array = array(
@@ -188,7 +192,10 @@ class Proccess {
 
                 if ($result):
 
-                    $headers = "Content-Type: text/html\r\n";
+                    $headers = array(
+                        'Content-Type: text/html; charset=UTF-8',
+                        'From: ' . get_option('taf_remetente_title') . ' <' . get_option('taf_remetente_email') . '>'
+                    );
                     $attachments = "";
 
                     $str_array = array(
